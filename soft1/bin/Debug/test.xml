@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<root>
+<item name="user">user</item>
+<item name="password">12345</item>
+<item name="port">80</item>
+<item name="client">browser</item>
+</root>
