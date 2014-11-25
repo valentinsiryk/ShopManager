@@ -1,0 +1,7 @@
+D:\PRACTIKA\soft_programm1\soft1\bin\Debug\soft1.exe
+D:\PRACTIKA\soft_programm1\soft1\bin\Debug\soft1.pdb
+D:\PRACTIKA\soft_programm1\soft1\obj\x86\Debug\soft1.Properties.Resources.resources
+D:\PRACTIKA\soft_programm1\soft1\obj\x86\Debug\soft1.csproj.GenerateResource.Cache
+D:\PRACTIKA\soft_programm1\soft1\obj\x86\Debug\soft1.exe
+D:\PRACTIKA\soft_programm1\soft1\obj\x86\Debug\soft1.pdb
+D:\PRACTIKA\soft_programm1\soft1\obj\x86\Debug\soft1.Form1.resources
