@@ -13,6 +13,8 @@ namespace soft1
     {
         public void parse()
         {
+            try
+            {
             XmlDocument doc = new XmlDocument();
             doc.Load(".\\test.xml");
 
@@ -24,7 +26,12 @@ namespace soft1
             string client =     doc.DocumentElement.ChildNodes[3].InnerText;*/
 
             MessageBox.Show(user, "b");
+             }
 
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.ToString(), "Error!");
+            }
                       
         }
     }
