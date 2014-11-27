@@ -46,7 +46,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnOtgruz = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBoxZakazov = new System.Windows.Forms.ComboBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -55,9 +55,9 @@
             // 
             // btnAllZakaz
             // 
-            this.btnAllZakaz.Location = new System.Drawing.Point(316, 12);
+            this.btnAllZakaz.Location = new System.Drawing.Point(277, 10);
             this.btnAllZakaz.Name = "btnAllZakaz";
-            this.btnAllZakaz.Size = new System.Drawing.Size(84, 27);
+            this.btnAllZakaz.Size = new System.Drawing.Size(84, 23);
             this.btnAllZakaz.TabIndex = 0;
             this.btnAllZakaz.Text = "GET XML";
             this.btnAllZakaz.UseVisualStyleBackColor = true;
@@ -65,7 +65,7 @@
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(13, 277);
+            this.add.Location = new System.Drawing.Point(140, 10);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(131, 23);
             this.add.TabIndex = 2;
@@ -78,11 +78,13 @@
             this.listZakazov.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.idZakaza,
             this.numberInXml});
+            this.listZakazov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listZakazov.FullRowSelect = true;
-            this.listZakazov.Location = new System.Drawing.Point(3, 41);
+            this.listZakazov.HideSelection = false;
+            this.listZakazov.Location = new System.Drawing.Point(0, 0);
             this.listZakazov.MultiSelect = false;
             this.listZakazov.Name = "listZakazov";
-            this.listZakazov.Size = new System.Drawing.Size(138, 141);
+            this.listZakazov.Size = new System.Drawing.Size(144, 318);
             this.listZakazov.SmallImageList = this.imageList1;
             this.listZakazov.TabIndex = 3;
             this.listZakazov.UseCompatibleStateImageBehavior = false;
@@ -110,11 +112,13 @@
             this.idTovara,
             this.numTovarov,
             this.successNum});
+            this.listTovarov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listTovarov.FullRowSelect = true;
-            this.listTovarov.Location = new System.Drawing.Point(37, 23);
+            this.listTovarov.HideSelection = false;
+            this.listTovarov.Location = new System.Drawing.Point(0, 0);
             this.listTovarov.MultiSelect = false;
             this.listTovarov.Name = "listTovarov";
-            this.listTovarov.Size = new System.Drawing.Size(233, 171);
+            this.listTovarov.Size = new System.Drawing.Size(285, 318);
             this.listTovarov.TabIndex = 5;
             this.listTovarov.UseCompatibleStateImageBehavior = false;
             this.listTovarov.View = System.Windows.Forms.View.Details;
@@ -146,7 +150,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listTovarov);
-            this.splitContainer1.Size = new System.Drawing.Size(433, 210);
+            this.splitContainer1.Size = new System.Drawing.Size(433, 318);
             this.splitContainer1.SplitterDistance = 144;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -156,10 +160,11 @@
             this.skladList,
             this.columnHeader1});
             this.listSkladov.FullRowSelect = true;
-            this.listSkladov.Location = new System.Drawing.Point(467, 70);
+            this.listSkladov.HideSelection = false;
+            this.listSkladov.Location = new System.Drawing.Point(451, 47);
             this.listSkladov.MultiSelect = false;
             this.listSkladov.Name = "listSkladov";
-            this.listSkladov.Size = new System.Drawing.Size(141, 136);
+            this.listSkladov.Size = new System.Drawing.Size(157, 234);
             this.listSkladov.TabIndex = 7;
             this.listSkladov.UseCompatibleStateImageBehavior = false;
             this.listSkladov.View = System.Windows.Forms.View.Details;
@@ -175,38 +180,47 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(467, 212);
+            this.numericUpDown1.Location = new System.Drawing.Point(451, 294);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(62, 20);
+            this.numericUpDown1.ReadOnly = true;
+            this.numericUpDown1.Size = new System.Drawing.Size(76, 20);
             this.numericUpDown1.TabIndex = 8;
             // 
             // btnOtgruz
             // 
-            this.btnOtgruz.Location = new System.Drawing.Point(535, 209);
+            this.btnOtgruz.Location = new System.Drawing.Point(533, 287);
             this.btnOtgruz.Name = "btnOtgruz";
-            this.btnOtgruz.Size = new System.Drawing.Size(75, 23);
+            this.btnOtgruz.Size = new System.Drawing.Size(75, 27);
             this.btnOtgruz.TabIndex = 9;
             this.btnOtgruz.Text = "Отгрузить";
             this.btnOtgruz.UseVisualStyleBackColor = true;
+            this.btnOtgruz.Click += new System.EventHandler(this.btnOtgruz_Click);
             // 
-            // comboBox1
+            // comboBoxZakazov
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comboBoxZakazov.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.comboBoxZakazov.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxZakazov.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.comboBoxZakazov.FormattingEnabled = true;
+            this.comboBoxZakazov.Items.AddRange(new object[] {
             "Активные заказы",
             "Резервы"});
-            this.comboBox1.Location = new System.Drawing.Point(13, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 10;
-            this.comboBox1.Text = "Тип заказов...";
+            this.comboBoxZakazov.Location = new System.Drawing.Point(13, 12);
+            this.comboBoxZakazov.Name = "comboBoxZakazov";
+            this.comboBoxZakazov.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxZakazov.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 416);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(621, 382);
+            this.Controls.Add(this.comboBoxZakazov);
             this.Controls.Add(this.btnOtgruz);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.listSkladov);
@@ -240,7 +254,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnOtgruz;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxZakazov;
         private System.Windows.Forms.ColumnHeader numberInXml;
     }
 }
