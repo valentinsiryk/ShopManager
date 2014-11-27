@@ -108,8 +108,9 @@ namespace soft1
                     ListViewItem item = new ListViewItem();
                     item.SubItems.Add(new ListViewItem.ListViewSubItem());
                     //item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                    item.SubItems[0].Text = "sklad" + (curSklad + 1);//doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[0].InnerText;
-                    item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].InnerText;
+                    //item.SubItems[0].Text = "sklad" + (curSklad + 1);//doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[0].InnerText;
+                    item.SubItems[0].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].ChildNodes[0].InnerText;
+                    item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].ChildNodes[1].InnerText;
                     //item.SubItems[2].Text = "0";
                     listSkladov.Items.Add(item);
                 }
