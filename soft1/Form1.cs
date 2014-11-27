@@ -18,6 +18,8 @@ namespace soft1
             InitializeComponent();
         }
 
+        public int curZakazGlobal = 0;
+
         private void btnShowAllZakaz(object sender, EventArgs e)
         {
             XmlDocument doc = new XmlDocument();
@@ -55,15 +57,17 @@ namespace soft1
             server.saveToFile(response);
         }
 
-        private void listZakazov_ItemActivate(object sender, EventArgs e)
+        private void listZakazov_Click(object sender, EventArgs e)
         {
             listTovarov.Items.Clear(); //clear list tovarov
+            listSkladov.Items.Clear();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(".\\test.xml");
             int curZakaz = Int32.Parse(listZakazov.FocusedItem.SubItems[1].Text);
+            curZakazGlobal = curZakaz;
 
-            xmlParser xml = new xmlParser();
+            //xmlParser xml = new xmlParser();
             int countTovarov = doc.DocumentElement.ChildNodes[curZakaz].ChildNodes.Count - 3;
             //MessageBox.Show(countTovarov.ToString(), "ed");
 
@@ -77,6 +81,31 @@ namespace soft1
                 item.SubItems[2].Text = "0";
                 listTovarov.Items.Add(item);
             }
+        }
+
+        private void listTovarov_Click(object sender, EventArgs e)
+        {
+            listSkladov.Items.Clear(); //clear list skladov
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(".\\test.xml");
+            int curTovar = listTovarov.FocusedItem.Index;
+            int countSkladov = 0;
+            
+            //MessageBox.Show(countTovarov.ToString(), "ed");
+            countSkladov = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar+3].ChildNodes[2].ChildNodes.Count;
+            
+            for (int curSklad = 0; curSklad < countSkladov; curSklad++)
+            {
+                ListViewItem item = new ListViewItem();
+                item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                //item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                item.SubItems[0].Text = "sklad" + (curSklad + 1);//doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[0].InnerText;
+                item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].InnerText;
+                //item.SubItems[2].Text = "0";
+                listSkladov.Items.Add(item);
+            }
+
         }
 
     }
