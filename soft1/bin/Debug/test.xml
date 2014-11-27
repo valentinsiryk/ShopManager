@@ -6,18 +6,30 @@
   <rezerv>1</rezerv>
   
   <tovar>
-   <tid>t001</tid>
+   <tid>t011</tid>
    <num>100</num>
+   <sklads>
+    <sklad>2010</sklad>
+	<sklad>200</sklad>
+   </sklads>
   </tovar>
   
   <tovar>
-   <tid>t002</tid>
+   <tid>t012</tid>
    <num>1050</num>
+   <sklads>
+    <sklad>2080</sklad>
+	<sklad>200</sklad>
+   </sklads>   
   </tovar>
   
   <tovar>
-   <tid>t003</tid>
+   <tid>t013</tid>
    <num>50</num>
+   <sklads>
+    <sklad>200</sklad>
+	<sklad>2020</sklad>
+   </sklads>   
   </tovar>
   
  </zakaz>
@@ -28,18 +40,30 @@
   <rezerv>0</rezerv>
   
   <tovar>
-   <tid>t011</tid>
+   <tid>t021</tid>
    <num>140</num>
+   <sklads>
+    <sklad>2400</sklad>
+	<sklad>200</sklad>
+   </sklads>
   </tovar>
   
   <tovar>
-   <tid>t012</tid>
+   <tid>t022</tid>
    <num>10</num>
+   <sklads>
+    <sklad>2060</sklad>
+	<sklad>200</sklad>
+   </sklads>
   </tovar>
   
   <tovar>
-   <tid>t013</tid>
+   <tid>t023</tid>
    <num>500</num>
+   <sklads>
+    <sklad>200</sklad>
+	<sklad>2400</sklad>
+   </sklads>
   </tovar>
   
  </zakaz>
@@ -50,18 +74,30 @@
   <rezerv>0</rezerv>  
   
   <tovar>
-   <tid>t021</tid>
+   <tid>t031</tid>
    <num>1400</num>
-  </tovar>
+   <sklads>
+    <sklad>200</sklad>
+	<sklad>2050</sklad>
+   </sklads>
+   </tovar>
   
   <tovar>
-   <tid>t022</tid>
+   <tid>t032</tid>
    <num>1000</num>
+   <sklads>
+    <sklad>200</sklad>
+	<sklad>2700</sklad>
+   </sklads>
   </tovar>
   
   <tovar>
-   <tid>t023</tid>
+   <tid>t033</tid>
    <num>5000</num>
+   <sklads>
+    <sklad>200</sklad>
+	<sklad>2040</sklad>
+   </sklads>
   </tovar>
   
  </zakaz>
@@ -72,18 +108,30 @@
   <rezerv>0</rezerv>  
   
   <tovar>
-   <tid>t031</tid>
+   <tid>t041</tid>
    <num>400</num>
+   <sklads>
+    <sklad>2500</sklad>
+	<sklad>200</sklad>
+   </sklads>
   </tovar>
   
   <tovar>
-   <tid>t032</tid>
+   <tid>t042</tid>
    <num>5000</num>
+   <sklads>
+    <sklad>200</sklad>
+	<sklad>2100</sklad>
+   </sklads>
   </tovar>
   
   <tovar>
-   <tid>t033</tid>
+   <tid>t043</tid>
    <num>200</num>
+   <sklads>
+    <sklad>2000</sklad>
+	<sklad>200</sklad>
+   </sklads>
   </tovar>
   </zakaz>
  </root>

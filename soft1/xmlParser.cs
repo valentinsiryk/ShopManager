@@ -38,14 +38,14 @@ namespace soft1
 
         }
 
-        public string getTovarItem(int i)
+       /* public string getTovarItem(int i)
         {
             try
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(".\\test.xml");
                 string zakaz = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
-                MessageBox.Show(doc.DocumentElement.ChildNodes[i].NextSibling.InnerText, "j");
+                //MessageBox.Show(doc.DocumentElement.ChildNodes[i].NextSibling.InnerText, "j");
                 return zakaz;
             }
             catch (Exception Ex)
@@ -53,6 +53,6 @@ namespace soft1
                 MessageBox.Show(Ex.ToString(), "Error!");
                 return "error";
             }
-        }
+        }*/
     }
 }

@@ -46,7 +46,7 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnOtgruz = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.numberInXml = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -61,25 +61,28 @@
             this.btnAllZakaz.TabIndex = 0;
             this.btnAllZakaz.Text = "GET XML";
             this.btnAllZakaz.UseVisualStyleBackColor = true;
-            this.btnAllZakaz.Click += new System.EventHandler(this.btnAllZakaz_Click);
+            this.btnAllZakaz.Click += new System.EventHandler(this.btnGetXml);
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(13, 272);
+            this.add.Location = new System.Drawing.Point(13, 277);
             this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(75, 23);
+            this.add.Size = new System.Drawing.Size(131, 23);
             this.add.TabIndex = 2;
-            this.add.Text = "Показать заказы";
+            this.add.Text = "Показать/Обновить";
             this.add.UseVisualStyleBackColor = true;
             this.add.Click += new System.EventHandler(this.btnShowAllZakaz);
             // 
             // listZakazov
             // 
             this.listZakazov.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.idZakaza});
-            this.listZakazov.Location = new System.Drawing.Point(19, 41);
+            this.idZakaza,
+            this.numberInXml});
+            this.listZakazov.FullRowSelect = true;
+            this.listZakazov.Location = new System.Drawing.Point(3, 41);
+            this.listZakazov.MultiSelect = false;
             this.listZakazov.Name = "listZakazov";
-            this.listZakazov.Size = new System.Drawing.Size(103, 141);
+            this.listZakazov.Size = new System.Drawing.Size(138, 141);
             this.listZakazov.SmallImageList = this.imageList1;
             this.listZakazov.TabIndex = 3;
             this.listZakazov.UseCompatibleStateImageBehavior = false;
@@ -103,7 +106,9 @@
             this.idTovara,
             this.numTovarov,
             this.successNum});
+            this.listTovarov.FullRowSelect = true;
             this.listTovarov.Location = new System.Drawing.Point(37, 23);
+            this.listTovarov.MultiSelect = false;
             this.listTovarov.Name = "listTovarov";
             this.listTovarov.Size = new System.Drawing.Size(233, 171);
             this.listTovarov.TabIndex = 5;
@@ -145,7 +150,9 @@
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.skladList,
             this.columnHeader1});
+            this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(467, 70);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(141, 136);
             this.listView1.TabIndex = 7;
@@ -189,21 +196,15 @@
             this.comboBox1.TabIndex = 10;
             this.comboBox1.Text = "Тип заказов...";
             // 
-            // button2
+            // numberInXml
             // 
-            this.button2.Location = new System.Drawing.Point(151, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(131, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Показать/Обновить";
-            this.button2.UseVisualStyleBackColor = true;
+            this.numberInXml.Width = 68;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(697, 416);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btnOtgruz);
             this.Controls.Add(this.numericUpDown1);
@@ -239,7 +240,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnOtgruz;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ColumnHeader numberInXml;
     }
 }
 

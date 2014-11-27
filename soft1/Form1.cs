@@ -23,7 +23,6 @@ namespace soft1
             XmlDocument doc = new XmlDocument();
             doc.Load(".\\test.xml");
 
-
             listZakazov.Items.Clear();
             xmlParser xml1 = new xmlParser();
             int count = xml1.getCountZakaz();
@@ -31,21 +30,23 @@ namespace soft1
             {
                 for (int i = 0; i < count; i++)
                 {
+                    int position = i;
                     if (doc.DocumentElement.ChildNodes[i].ChildNodes[2].InnerText != "1")
                     {
-                    ListViewItem item = new ListViewItem();
-                    item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                    item.SubItems[0].Text = xml1.getZakaz(i);
-                    if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == "1")
-                        item.ImageIndex = 0; //image
-                    listZakazov.Items.Add(item);
+                        ListViewItem item = new ListViewItem();
+                        item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                        item.SubItems[0].Text = xml1.getZakaz(i);
+                        item.SubItems[1].Text = position.ToString();
+                        if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == "1")
+                            item.ImageIndex = 0; //image
+                        listZakazov.Items.Add(item);
                     }
                 }
             }
 
         }
 
-        private void btnAllZakaz_Click(object sender, EventArgs e)
+        private void btnGetXml(object sender, EventArgs e)
         {
             xml_request server = new xml_request();
 
@@ -56,15 +57,25 @@ namespace soft1
 
         private void listZakazov_ItemActivate(object sender, EventArgs e)
         {
-            listTovarov.Items.Clear();
+            listTovarov.Items.Clear(); //clear list tovarov
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(".\\test.xml");
+            int curZakaz = Int32.Parse(listZakazov.FocusedItem.SubItems[1].Text);
+
             xmlParser xml = new xmlParser();
-            for (int i = 0; i < 2; i++)
+            int countTovarov = doc.DocumentElement.ChildNodes[curZakaz].ChildNodes.Count - 3;
+            //MessageBox.Show(countTovarov.ToString(), "ed");
+
+            for (int curTovar = 0; curTovar < countTovarov; curTovar++)
             {
                 ListViewItem item = new ListViewItem();
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                item.SubItems[0].Text = xml.getTovarItem(i); ;
+                item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                item.SubItems[0].Text = doc.DocumentElement.ChildNodes[curZakaz].ChildNodes[curTovar + 3].ChildNodes[0].InnerText;
+                item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakaz].ChildNodes[curTovar + 3].ChildNodes[1].InnerText;
+                item.SubItems[2].Text = "0";
                 listTovarov.Items.Add(item);
-                
             }
         }
 
