@@ -1,16 +1,89 @@
 <?xml version="1.0"?>
 <root>
- <item name="user">
-  <name>Valentin</name>
-  <surname>Siryk</surname>
- </item>
- <item name="password">
-  12345
- </item>
- <item name="port">
-  80
- </item>
- <item name="client">
-  browser
- </item>
-</root>
+ <zakaz>
+  <zid>z001</zid>
+  <status>0</status>
+  <rezerv>1</rezerv>
+  
+  <tovar>
+   <tid>t001</tid>
+   <num>100</num>
+  </tovar>
+  
+  <tovar>
+   <tid>t002</tid>
+   <num>1050</num>
+  </tovar>
+  
+  <tovar>
+   <tid>t003</tid>
+   <num>50</num>
+  </tovar>
+  
+ </zakaz>
+ 
+  <zakaz>
+  <zid>z002</zid>
+  <status>1</status>
+  <rezerv>0</rezerv>
+  
+  <tovar>
+   <tid>t011</tid>
+   <num>140</num>
+  </tovar>
+  
+  <tovar>
+   <tid>t012</tid>
+   <num>10</num>
+  </tovar>
+  
+  <tovar>
+   <tid>t013</tid>
+   <num>500</num>
+  </tovar>
+  
+ </zakaz>
+
+  <zakaz>
+  <zid>z003</zid>
+  <status>1</status>
+  <rezerv>0</rezerv>  
+  
+  <tovar>
+   <tid>t021</tid>
+   <num>1400</num>
+  </tovar>
+  
+  <tovar>
+   <tid>t022</tid>
+   <num>1000</num>
+  </tovar>
+  
+  <tovar>
+   <tid>t023</tid>
+   <num>5000</num>
+  </tovar>
+  
+ </zakaz>
+ 
+   <zakaz>
+  <zid>z004</zid>
+  <status>0</status>
+  <rezerv>0</rezerv>  
+  
+  <tovar>
+   <tid>t031</tid>
+   <num>400</num>
+  </tovar>
+  
+  <tovar>
+   <tid>t032</tid>
+   <num>5000</num>
+  </tovar>
+  
+  <tovar>
+   <tid>t033</tid>
+   <num>200</num>
+  </tovar>
+  </zakaz>
+ </root>

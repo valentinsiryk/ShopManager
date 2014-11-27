@@ -11,28 +11,48 @@ namespace soft1
 {
     class xmlParser
     {
-        public void parse()
+        public int getCountZakaz()
         {
-            try
-            {
             XmlDocument doc = new XmlDocument();
             doc.Load(".\\test.xml");
+            return doc.DocumentElement.ChildNodes.Count; 
+        }
 
-            string user = doc.DocumentElement.ChildNodes[0].ChildNodes[1].InnerText;
-            /*string password =   doc.DocumentElement.ChildNodes[1].InnerText;
 
-            int port =          int.Parse(doc.DocumentElement.ChildNodes[2].InnerText.Trim());
+        public string getZakaz(int i)
+        {
+      
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(".\\test.xml");
+                string zakazId = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
 
-            string client =     doc.DocumentElement.ChildNodes[3].InnerText;*/
-
-            MessageBox.Show(user, "b");
-             }
-
+                return zakazId;
+            }
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.ToString(), "Error!");
+                return "error";
             }
-                      
+
+        }
+
+        public string getTovarItem(int i)
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(".\\test.xml");
+                string zakaz = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
+                MessageBox.Show(doc.DocumentElement.ChildNodes[i].NextSibling.InnerText, "j");
+                return zakaz;
+            }
+            catch (Exception Ex)
+            {
+                MessageBox.Show(Ex.ToString(), "Error!");
+                return "error";
+            }
         }
     }
 }

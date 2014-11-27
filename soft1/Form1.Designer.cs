@@ -35,7 +35,6 @@
             this.listZakazov = new System.Windows.Forms.ListView();
             this.idZakaza = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.listTovarov = new System.Windows.Forms.ListView();
             this.idTovara = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.numTovarov = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -56,23 +55,23 @@
             // 
             // btnAllZakaz
             // 
-            this.btnAllZakaz.Location = new System.Drawing.Point(50, 263);
+            this.btnAllZakaz.Location = new System.Drawing.Point(316, 12);
             this.btnAllZakaz.Name = "btnAllZakaz";
-            this.btnAllZakaz.Size = new System.Drawing.Size(100, 44);
+            this.btnAllZakaz.Size = new System.Drawing.Size(84, 27);
             this.btnAllZakaz.TabIndex = 0;
-            this.btnAllZakaz.Text = "Все заказы";
+            this.btnAllZakaz.Text = "GET XML";
             this.btnAllZakaz.UseVisualStyleBackColor = true;
             this.btnAllZakaz.Click += new System.EventHandler(this.btnAllZakaz_Click);
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(12, 326);
+            this.add.Location = new System.Drawing.Point(13, 272);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(75, 23);
             this.add.TabIndex = 2;
-            this.add.Text = "ADD";
+            this.add.Text = "Показать заказы";
             this.add.UseVisualStyleBackColor = true;
-            this.add.Click += new System.EventHandler(this.add_Click);
+            this.add.Click += new System.EventHandler(this.btnShowAllZakaz);
             // 
             // listZakazov
             // 
@@ -85,6 +84,7 @@
             this.listZakazov.TabIndex = 3;
             this.listZakazov.UseCompatibleStateImageBehavior = false;
             this.listZakazov.View = System.Windows.Forms.View.Details;
+            this.listZakazov.Click += new System.EventHandler(this.listZakazov_ItemActivate);
             // 
             // idZakaza
             // 
@@ -96,16 +96,6 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "ok.ico");
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(171, 284);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listTovarov
             // 
@@ -205,7 +195,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(131, 23);
             this.button2.TabIndex = 11;
-            this.button2.Text = "Показать/обновить";
+            this.button2.Text = "Показать/Обновить";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
@@ -221,7 +211,6 @@
             this.Controls.Add(this.add);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.btnAllZakaz);
-            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = " ";
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -239,7 +228,6 @@
         private System.Windows.Forms.ListView listZakazov;
         private System.Windows.Forms.ColumnHeader idZakaza;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listTovarov;
         private System.Windows.Forms.ColumnHeader idTovara;
         private System.Windows.Forms.ColumnHeader numTovarov;
