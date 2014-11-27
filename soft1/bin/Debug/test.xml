@@ -2,7 +2,7 @@
 <root>
  <zakaz>
   <zid>z001</zid>
-  <status>0</status>
+  <status>0</status> <!--выполнен/не выполнен-->
   <rezerv>1</rezerv>
   
   <tovar>

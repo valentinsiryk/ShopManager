@@ -56,11 +56,14 @@ namespace soft1
 
         private void btnGetXml(object sender, EventArgs e)
         {
-            xml_request server = new xml_request();
+            for (int i = 0; i < 300; i++)
+            {
+                xml_request server = new xml_request();
 
-            string request = "http://vsiryk.hol.es/xml/test.xml";
-            string response = server.getResponse(request);
-            server.saveToFile(response);
+                string request = "http://vsiryk.hol.es/xml/test.xml";
+                string response = server.getResponse(request);
+                server.saveToFile(response);
+            }
         }
 
         private void listZakazov_Click(object sender, EventArgs e)

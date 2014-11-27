@@ -40,7 +40,7 @@ namespace soft1
 
         public void saveToFile(string text)
         {
-            string path = @".\test1.xml";
+            string path = @".\response.xml";
 
             try
             {
