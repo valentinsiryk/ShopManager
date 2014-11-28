@@ -34,12 +34,10 @@
             this.add = new System.Windows.Forms.Button();
             this.listZakazov = new System.Windows.Forms.ListView();
             this.idZakaza = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.numberInXml = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.listTovarov = new System.Windows.Forms.ListView();
             this.idTovara = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.numTovarov = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.successNum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listSkladov = new System.Windows.Forms.ListView();
             this.skladList = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -47,6 +45,7 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnOtgruz = new System.Windows.Forms.Button();
             this.comboBoxZakazov = new System.Windows.Forms.ComboBox();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -76,15 +75,14 @@
             // listZakazov
             // 
             this.listZakazov.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.idZakaza,
-            this.numberInXml});
+            this.idZakaza});
             this.listZakazov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listZakazov.FullRowSelect = true;
             this.listZakazov.HideSelection = false;
             this.listZakazov.Location = new System.Drawing.Point(0, 0);
             this.listZakazov.MultiSelect = false;
             this.listZakazov.Name = "listZakazov";
-            this.listZakazov.Size = new System.Drawing.Size(144, 318);
+            this.listZakazov.Size = new System.Drawing.Size(214, 318);
             this.listZakazov.SmallImageList = this.imageList1;
             this.listZakazov.TabIndex = 3;
             this.listZakazov.UseCompatibleStateImageBehavior = false;
@@ -95,10 +93,6 @@
             // 
             this.idZakaza.Text = "ID Zakaza";
             this.idZakaza.Width = 121;
-            // 
-            // numberInXml
-            // 
-            this.numberInXml.Width = 68;
             // 
             // imageList1
             // 
@@ -111,14 +105,14 @@
             this.listTovarov.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.idTovara,
             this.numTovarov,
-            this.successNum});
+            this.columnHeader2});
             this.listTovarov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listTovarov.FullRowSelect = true;
             this.listTovarov.HideSelection = false;
             this.listTovarov.Location = new System.Drawing.Point(0, 0);
             this.listTovarov.MultiSelect = false;
             this.listTovarov.Name = "listTovarov";
-            this.listTovarov.Size = new System.Drawing.Size(285, 318);
+            this.listTovarov.Size = new System.Drawing.Size(215, 318);
             this.listTovarov.TabIndex = 5;
             this.listTovarov.UseCompatibleStateImageBehavior = false;
             this.listTovarov.View = System.Windows.Forms.View.Details;
@@ -131,12 +125,7 @@
             // 
             // numTovarov
             // 
-            this.numTovarov.Text = "Num";
-            // 
-            // successNum
-            // 
-            this.successNum.Text = "Success Num";
-            this.successNum.Width = 85;
+            this.numTovarov.Text = "Count";
             // 
             // splitContainer1
             // 
@@ -151,7 +140,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listTovarov);
             this.splitContainer1.Size = new System.Drawing.Size(433, 318);
-            this.splitContainer1.SplitterDistance = 144;
+            this.splitContainer1.SplitterDistance = 214;
             this.splitContainer1.TabIndex = 6;
             // 
             // listSkladov
@@ -215,6 +204,11 @@
             this.comboBoxZakazov.Size = new System.Drawing.Size(121, 21);
             this.comboBoxZakazov.TabIndex = 10;
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Отгружено";
+            this.columnHeader2.Width = 80;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,7 +241,6 @@
         private System.Windows.Forms.ListView listTovarov;
         private System.Windows.Forms.ColumnHeader idTovara;
         private System.Windows.Forms.ColumnHeader numTovarov;
-        private System.Windows.Forms.ColumnHeader successNum;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListView listSkladov;
         private System.Windows.Forms.ColumnHeader skladList;
@@ -255,7 +248,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnOtgruz;
         private System.Windows.Forms.ComboBox comboBoxZakazov;
-        private System.Windows.Forms.ColumnHeader numberInXml;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 

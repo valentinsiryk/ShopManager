@@ -38,31 +38,19 @@ namespace soft1
 
          }
 
-        public void saveToFile(string text)
+        public void saveToFile(string text, string path)
         {
-            string path = @".\response.xml";
-
             try
             {
                 if (File.Exists(path))
                     File.Delete(path);
 
-                // Create the file.
                 using (FileStream fs = File.Create(path))
                 {
                     Byte[] info = new UTF8Encoding(true).GetBytes(text);
                     fs.Write(info, 0, info.Length); // Add some information to the file.
                 }
 
-                /*// Open the stream and read it back.
-                using (StreamReader sr = File.OpenText(path))
-                {
-                    string s = "";
-                    while ((s = sr.ReadLine()) != null)
-                    {
-                        Console.WriteLine(s);
-                    }
-                }*/
             }
 
             catch (Exception Ex)
