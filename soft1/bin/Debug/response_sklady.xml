@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<root>
+    <sklad>
+	 <sid>s1</sid>
+	 <koltov>2010</koltov>
+	</sklad>
+	
+	<sklad>
+	 <sid>s2</sid>
+	 <koltov>5010</koltov>
+	</sklad>
+	
+    <sklad>
+	 <sid>s1</sid>
+	 <koltov>1000</koltov>
+	</sklad>
+	
+	<sklad>
+	 <sid>s2</sid>
+	 <koltov>5000</koltov>
+	</sklad>
+</root>
