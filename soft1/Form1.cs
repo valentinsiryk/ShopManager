@@ -92,11 +92,12 @@ namespace soft1
 
         private void listTovarov_Click(object sender, EventArgs e)
         {
-            showSklady("id tovara"); //подставить айди желаемого товара
-
-
             listSkladov.Items.Clear(); //clear list skladov
+            showSklady(listTovarov.SelectedItems[0].SubItems[0].Text); //подставить айди желаемого товара
 
+
+            
+            /*
             XmlDocument doc = new XmlDocument();
             doc.Load(".\\test.xml");
 
@@ -111,7 +112,7 @@ namespace soft1
                 item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].ChildNodes[1].InnerText;
                 listSkladov.Items.Add(item);
             }
-
+            */
 
         }
 
@@ -122,6 +123,26 @@ namespace soft1
 
             string response = server.getResponse(req);
             server.saveToFile(response, @".\response_sklady.xml");
+
+            XmlDocument docSklady = new XmlDocument();
+            docSklady.Load(".\\response_sklady.xml");
+
+            int countSkladov = docSklady.DocumentElement.ChildNodes.Count;
+
+            for (int i = 0; i < countSkladov; i++)
+            {
+                ListViewItem item = new ListViewItem();
+                item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                item.SubItems[0].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
+                item.SubItems[1].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText;
+                listSkladov.Items.Add(item);
+            }
+            /*
+            int curTovar = 0;
+            while (idTovara != docSklady.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[0].InnerText)
+            {
+                curZakazGlobal++;
+            }*/
 
         }
 
