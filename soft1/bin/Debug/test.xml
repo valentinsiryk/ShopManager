@@ -2,7 +2,7 @@
 <root>
  <zakaz>
   <zid>z001</zid>
-  <status>0</status>
+  <status>0</status> <!--выполнен/не выполнен-->
   <rezerv>1</rezerv>
   
   <tovar>
@@ -205,7 +205,7 @@
 	</sklad>
 	<sklad>
 	 <sid>s3</sid>
-	 <koltov>4000</koltov>
+	 <koltov>5000</koltov>
 	</sklad>
    </sklads> 
   </tovar>

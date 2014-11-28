@@ -19,33 +19,36 @@ namespace soft1
             comboBoxZakazov.SelectedIndex = 0;
         }
 
-        public int otgruzOk = 1;
         public int curZakazGlobal = 0;
+        public int otgruzOk = 1;
 
         private void btnShowAllZakaz(object sender, EventArgs e)
         {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(".\\test.xml");
             otgruzOk = 1;
 
-            listZakazov.Items.Clear(); //clear list zakazov
-            listTovarov.Items.Clear(); //clear list tovarov
-            listSkladov.Items.Clear(); //clear list skladov
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(".\\test.xml");  //load xml into the file 
-
-            int countZakazov = doc.DocumentElement.ChildNodes.Count;
-
-            for (int i = 0; i < countZakazov; i++)
+            listZakazov.Items.Clear();
+            listTovarov.Items.Clear();
+            listSkladov.Items.Clear();
+            xmlParser xml1 = new xmlParser();
+            int count = xml1.getCountZakaz();
+            if (count > 0)
             {
-                if (doc.DocumentElement.ChildNodes[i].ChildNodes[2].InnerText == comboBoxZakazov.SelectedIndex.ToString())
+                for (int i = 0; i < count; i++)
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                    item.SubItems[0].Text = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText; //id zakaza
-                    //item.SubItems[1].Text = i.ToString(); //!
-                    if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == "1") //status vipolneniya
-                        item.ImageIndex = 0; //image
-                    listZakazov.Items.Add(item);
+                    int type = comboBoxZakazov.SelectedIndex;
+                    int position = i;
+                    if (doc.DocumentElement.ChildNodes[i].ChildNodes[2].InnerText == type.ToString())
+                    {
+                        ListViewItem item = new ListViewItem();
+                        item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                        item.SubItems[0].Text = xml1.getZakaz(i);
+                        item.SubItems[1].Text = position.ToString();
+                        if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == "1")
+                            item.ImageIndex = 0; //image
+                        listZakazov.Items.Add(item);
+                    }
                 }
             }
 
@@ -53,38 +56,37 @@ namespace soft1
 
         private void btnGetXml(object sender, EventArgs e)
         {
+            for (int i = 0; i < 300; i++)
+            {
                 xml_request server = new xml_request();
 
                 string request = "http://vsiryk.hol.es/xml/test.xml";
                 string response = server.getResponse(request);
-
-                server.saveToFile(response, @".\response.xml");
+                server.saveToFile(response);
+            }
         }
 
         private void listZakazov_Click(object sender, EventArgs e)
         {
             listTovarov.Items.Clear(); //clear list tovarov
-            listSkladov.Items.Clear(); //clear list skladov
+            listSkladov.Items.Clear();
 
             XmlDocument doc = new XmlDocument();
             doc.Load(".\\test.xml");
+            int curZakaz = Int32.Parse(listZakazov.FocusedItem.SubItems[1].Text);
+            curZakazGlobal = curZakaz;
 
-            string curZakazId = listZakazov.SelectedItems[0].SubItems[0].Text;
+            //xmlParser xml = new xmlParser();
+            int countTovarov = doc.DocumentElement.ChildNodes[curZakaz].ChildNodes.Count - 3;
+            //MessageBox.Show(countTovarov.ToString(), "ed");
 
-            curZakazGlobal = 0;
-            while (curZakazId != doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[0].InnerText)
-            {
-                curZakazGlobal++;
-            }
-
-            int countTovarov = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes.Count - 3;
             for (int curTovar = 0; curTovar < countTovarov; curTovar++)
             {
                 ListViewItem item = new ListViewItem();
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                item.SubItems[0].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[0].InnerText;
-                item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[1].InnerText;
+                item.SubItems[0].Text = doc.DocumentElement.ChildNodes[curZakaz].ChildNodes[curTovar + 3].ChildNodes[0].InnerText;
+                item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakaz].ChildNodes[curTovar + 3].ChildNodes[1].InnerText;
                 item.SubItems[2].Text = "0";
                 listTovarov.Items.Add(item);
             }
@@ -92,41 +94,34 @@ namespace soft1
 
         private void listTovarov_Click(object sender, EventArgs e)
         {
-            showSklady("id tovara"); //подставить айди желаемого товара
-
-
-            listSkladov.Items.Clear(); //clear list skladov
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(".\\test.xml");
-
-            int curTovar = listTovarov.FocusedItem.Index;
-            int countSkladov = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes.Count;
-
-            for (int curSklad = 0; curSklad < countSkladov; curSklad++)
+            if (otgruzOk == 1)
             {
-                ListViewItem item = new ListViewItem();
-                item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                item.SubItems[0].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].ChildNodes[0].InnerText;
-                item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].ChildNodes[1].InnerText;
-                listSkladov.Items.Add(item);
+                listSkladov.Items.Clear(); //clear list skladov
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(".\\test.xml");
+                int curTovar = listTovarov.FocusedItem.Index;
+                int countSkladov = 0;
+
+                //MessageBox.Show(countTovarov.ToString(), "ed");
+                countSkladov = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes.Count;
+
+                for (int curSklad = 0; curSklad < countSkladov; curSklad++)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                    //item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                    //item.SubItems[0].Text = "sklad" + (curSklad + 1);//doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[0].InnerText;
+                    item.SubItems[0].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].ChildNodes[0].InnerText;
+                    item.SubItems[1].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[2].ChildNodes[curSklad].ChildNodes[1].InnerText;
+                    //item.SubItems[2].Text = "0";
+                    listSkladov.Items.Add(item);
+                }
             }
-
-
-        }
-
-        void showSklady(string idTovara)
-        {
-            string req = "http://vsiryk.hol.es/xml/sklady.xml";
-            xml_request server = new xml_request();
-
-            string response = server.getResponse(req);
-            server.saveToFile(response, @".\response_sklady.xml");
+            else
+                MessageBox.Show("Необходимо закончить отгрузку даного товара", "Error!");
 
         }
-
-
-
 
         private void btnOtgruz_Click(object sender, EventArgs e)
         {
@@ -137,7 +132,7 @@ namespace soft1
                 decimal curSkladNal = Int32.Parse(listSkladov.SelectedItems[0].SubItems[1].Text);
                 decimal curZakazTovNum = Int32.Parse(listTovarov.SelectedItems[0].SubItems[1].Text);
 
-
+                
                 /*else if (curSucNum > Int32.Parse(listTovarov.SelectedItems[0].SubItems[1].Text))
                     MessageBox.Show("Количество отгрузки превышает количество заказа!", "Error!");*/
                 {
@@ -155,7 +150,7 @@ namespace soft1
                             listSkladov.SelectedItems[0].SubItems[1].Text = (curSkladNal - numValue).ToString();
                             if (listTovarov.SelectedItems[0].SubItems[1].Text == listTovarov.SelectedItems[0].SubItems[2].Text)
                                 otgruzOk = 1;
-
+                
                         }
                     }
                     /*curSkladNal -= numericUpDown1.Value;
