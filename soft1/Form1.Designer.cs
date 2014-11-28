@@ -38,6 +38,7 @@
             this.listTovarov = new System.Windows.Forms.ListView();
             this.idTovara = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.numTovarov = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listSkladov = new System.Windows.Forms.ListView();
             this.skladList = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,7 +46,7 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnOtgruz = new System.Windows.Forms.Button();
             this.comboBoxZakazov = new System.Windows.Forms.ComboBox();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button1 = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -127,6 +128,11 @@
             // 
             this.numTovarov.Text = "Count";
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Отгружено";
+            this.columnHeader2.Width = 80;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Location = new System.Drawing.Point(12, 47);
@@ -204,16 +210,22 @@
             this.comboBoxZakazov.Size = new System.Drawing.Size(121, 21);
             this.comboBoxZakazov.TabIndex = 10;
             // 
-            // columnHeader2
+            // button1
             // 
-            this.columnHeader2.Text = "Отгружено";
-            this.columnHeader2.Width = 80;
+            this.button1.Location = new System.Drawing.Point(404, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Get XML Doc Stream";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 382);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBoxZakazov);
             this.Controls.Add(this.btnOtgruz);
             this.Controls.Add(this.numericUpDown1);
@@ -249,6 +261,7 @@
         private System.Windows.Forms.Button btnOtgruz;
         private System.Windows.Forms.ComboBox comboBoxZakazov;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -7,12 +7,14 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Net;
+using System.Xml;
 
 namespace soft1
 {
     public class xml_request
     {
-        public string getResponse(string req)
+        
+        public string getResponseString(string req)
         {
             try
             {
@@ -24,9 +26,9 @@ namespace soft1
                 
                 StreamReader reader = new StreamReader(dataStream); // Open the stream using a StreamReader for easy access.
                 string responseFromServer = reader.ReadToEnd(); // Read the content.
+
                 reader.Close(); // Clean up the streams and the response.
                 response.Close(); // Clean up the streams and the response.
-
                 return responseFromServer;
             }
 
@@ -37,6 +39,40 @@ namespace soft1
             }
 
          }
+
+        public XmlDocument getXmlDoc(string url) //функция возвращает XmlDocument, для дальнейшего парсинга
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(url);
+            return doc;
+           /* WebRequest request = WebRequest.Create(req); // Create a request for the URL. 
+            request.Credentials = CredentialCache.DefaultCredentials; // If required by the server, set the credentials.
+
+            WebResponse response = request.GetResponse(); // Get the response.
+            Stream dataStream = response.GetResponseStream(); // Get the stream containing content returned by the server.
+
+            StreamReader reader = new StreamReader(dataStream); // Open the stream using a StreamReader for easy access.
+            
+            XmlDocument doc = new XmlDocument();
+            doc.Load(reader);
+
+            reader.Close(); // Clean up the streams and the response.
+            response.Close(); // Clean up the streams and the response.
+
+            return doc;*/
+        }
+
+
+
+       /*public XmlDocument getXmlDocQuick(string url) //функция возвращает XmlDocument, для дальнейшего парсинга
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(url);
+            return doc;
+        }*/
+
+
+
 
         public void saveToFile(string text, string path)
         {

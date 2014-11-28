@@ -30,8 +30,11 @@ namespace soft1
             listTovarov.Items.Clear(); //clear list tovarov
             listSkladov.Items.Clear(); //clear list skladov
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(".\\test.xml");  //load xml into the file 
+            //XmlDocument doc = new XmlDocument();
+            //doc.Load(".\\test.xml");  //load xml into the file 
+            xml_request req = new xml_request();
+            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/test.xml");
+
 
             int countZakazov = doc.DocumentElement.ChildNodes.Count;
 
@@ -56,7 +59,7 @@ namespace soft1
                 xml_request server = new xml_request();
 
                 string request = "http://vsiryk.hol.es/xml/test.xml";
-                string response = server.getResponse(request);
+                string response = server.getXmlDoc(request).InnerXml;
 
                 server.saveToFile(response, @".\response.xml");
         }
@@ -66,8 +69,11 @@ namespace soft1
             listTovarov.Items.Clear(); //clear list tovarov
             listSkladov.Items.Clear(); //clear list skladov
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(".\\test.xml");
+            /*XmlDocument doc = new XmlDocument();
+            doc.Load(".\\test.xml");*/
+
+            xml_request req = new xml_request();
+            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/test.xml");
 
             string curZakazId = listZakazov.SelectedItems[0].SubItems[0].Text;
 
@@ -120,13 +126,13 @@ namespace soft1
         {
             string req = "http://vsiryk.hol.es/xml/sklady.xml";
             xml_request server = new xml_request();
-
-            string response = server.getResponse(req);
+            /*
+            string response = server.getXmlDoc(req).InnerXml;
             server.saveToFile(response, @".\response_sklady.xml");
 
             XmlDocument docSklady = new XmlDocument();
-            docSklady.Load(".\\response_sklady.xml");
-
+            docSklady.Load(".\\response_sklady.xml");*/
+            XmlDocument docSklady = server.getXmlDoc(req);
             int countSkladov = docSklady.DocumentElement.ChildNodes.Count;
 
             for (int i = 0; i < countSkladov; i++)
@@ -137,13 +143,6 @@ namespace soft1
                 item.SubItems[1].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText;
                 listSkladov.Items.Add(item);
             }
-            /*
-            int curTovar = 0;
-            while (idTovara != docSklady.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[0].InnerText)
-            {
-                curZakazGlobal++;
-            }*/
-
         }
 
 
@@ -187,6 +186,13 @@ namespace soft1
             {
                 MessageBox.Show("Нужно выбрать склад!", "Error!");
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            xml_request req = new xml_request();
+
+            MessageBox.Show(req.getXmlDoc("http://xml.weather.yahoo.com/forecastrss?p=94704").InnerXml, "xml doc");
         }
 
 
