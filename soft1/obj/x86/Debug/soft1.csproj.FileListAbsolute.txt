@@ -12,3 +12,4 @@ D:\GitHub\ShopManager\soft1\bin\Debug\soft1.pdb
 D:\GitHub\ShopManager\soft1\obj\x86\Debug\soft1.Form1.resources
 D:\GitHub\ShopManager\soft1\obj\x86\Debug\soft1.Properties.Resources.resources
 D:\GitHub\ShopManager\soft1\obj\x86\Debug\soft1.csproj.GenerateResource.Cache
+D:\GitHub\ShopManager\soft1\obj\x86\Debug\soft1.csprojResolveAssemblyReference.cache
