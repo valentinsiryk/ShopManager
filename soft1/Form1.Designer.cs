@@ -54,6 +54,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnSuccess = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBoxTest = new System.Windows.Forms.TextBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -257,7 +258,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(420, 19);
+            this.button1.Location = new System.Drawing.Point(535, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 23);
             this.button1.TabIndex = 11;
@@ -277,6 +278,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.textBoxTest);
             this.tabPage1.Controls.Add(this.btnSuccess);
             this.tabPage1.Controls.Add(this.comboBoxZakazov);
             this.tabPage1.Controls.Add(this.button1);
@@ -314,6 +316,13 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // textBoxTest
+            // 
+            this.textBoxTest.Location = new System.Drawing.Point(383, 19);
+            this.textBoxTest.Name = "textBoxTest";
+            this.textBoxTest.Size = new System.Drawing.Size(146, 20);
+            this.textBoxTest.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,6 +340,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -361,6 +371,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnSuccess;
+        private System.Windows.Forms.TextBox textBoxTest;
     }
 }
 

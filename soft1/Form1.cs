@@ -22,6 +22,7 @@ namespace soft1
 
         //public int otgruzOk = 1;
         public int curZakazGlobal = 0;
+        public string curIdZakaza = "null";
 
         private void btnShowAllZakaz(object sender, EventArgs e)
         {
@@ -35,7 +36,7 @@ namespace soft1
             //XmlDocument doc = new XmlDocument();
             //doc.Load(".\\test.xml");  //load xml into the file 
             xml_request req = new xml_request();
-            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/test.xml");
+            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/zakazi.xml"); //http://192.168.35.19/Index.php?option=zakazi");
 
 
             int countZakazov = doc.DocumentElement.ChildNodes.Count;
@@ -46,11 +47,16 @@ namespace soft1
                 {
                     ListViewItem item = new ListViewItem();
                     item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                    item.SubItems[0].Text = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText; //id zakaza
-                    //item.SubItems[1].Text = i.ToString(); //!
-                    if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == "1") //status vipolneniya
-                        item.ImageIndex = 0; //image
-                    listZakazov.Items.Add(item);
+
+
+                    if (doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText != curIdZakaza)
+                    {
+                        item.SubItems[0].Text = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText; //id zakaza
+                        if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == "1") //status vipolneniya
+                            item.ImageIndex = 0; //image
+                        listZakazov.Items.Add(item);
+                        curIdZakaza = item.SubItems[0].Text;
+                    }
                 }
             }
 
@@ -58,12 +64,14 @@ namespace soft1
 
         private void btnGetXml(object sender, EventArgs e)
         {
-            xml_request server = new xml_request();
+            XmlFile server = new XmlFile();
+            xml_request sf = new xml_request();
 
             string request = "http://vsiryk.hol.es/xml/test.xml";
-            string response = server.getXmlDoc(request).InnerXml;
-
-            server.saveToFile(response, @".\response.xml");
+            //MessageBox.Show(request, "dsgf");
+            string response = server.getResponseFromServer(request);
+            //MessageBox.Show(response, "dsgf");
+            sf.saveToFile(response, @".\response.xml");
         }
 
         private void listZakazov_Click(object sender, EventArgs e)
@@ -76,29 +84,33 @@ namespace soft1
             doc.Load(".\\test.xml");*/
 
             xml_request req = new xml_request();
-            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/test.xml");
+            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/zakazi.xml");
 
             string curZakazId = listZakazov.SelectedItems[0].SubItems[0].Text;
-
+            int countOrdersInXml = doc.DocumentElement.ChildNodes.Count;
+            /*
             curZakazGlobal = 0;
             while (curZakazId != doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[0].InnerText)
             {
                 curZakazGlobal++;
-            }
+            }*/
 
-            int countTovarov = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes.Count - 3;
-            for (int curTovar = 0; curTovar < countTovarov; curTovar++)
+            //int countTovarov = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes.Count - 3;
+            for (int i = 0; i < countOrdersInXml; i++)
             {
+                if (doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText == curZakazId.ToString())
+                {
                 ListViewItem item = new ListViewItem();
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                item.SubItems[0].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[0].InnerText;
+                item.SubItems[0].Text = doc.DocumentElement.ChildNodes[i].ChildNodes[3].InnerText;
                 //item.SubItems[1].Text = getNameInfTovar(item.SubItems[0].Text, "name"); //берем имя с базы
                 item.SubItems[1].Text = "name"; //name tovara
-                item.SubItems[2].Text = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[curTovar + 3].ChildNodes[1].InnerText;
+                item.SubItems[2].Text = doc.DocumentElement.ChildNodes[i].ChildNodes[4].InnerText;
                 item.SubItems[3].Text = "0";
                 listTovarov.Items.Add(item);
+                }
             }
         }
 
@@ -120,14 +132,14 @@ namespace soft1
         {
             string idTovara = listTovarov.SelectedItems[0].SubItems[0].Text; //подставить айди желаемого товара
 
-            xml_request server = new xml_request();
-            string req_descr = "http://vsiryk.hol.es/xml/descr.xml";
+            //xml_request server = new xml_request();
+            //string req_descr = "http://vsiryk.hol.es/xml/tov_na_skl.xml";
 
             //DescriptionIn.Text = getNameInfTovar(idTovara, "info");
 
 
-            XmlDocument docDeskr = server.getXmlDoc(req_descr);
-            DescriptionIn.Text = docDeskr.DocumentElement.InnerText;
+            /*XmlDocument docDeskr = server.getXmlDoc(req_descr);
+            DescriptionIn.Text = docDeskr.DocumentElement.InnerText;*/
 
             skladListUpdate(idTovara);
             /*
@@ -148,7 +160,7 @@ namespace soft1
         {
             listSkladov.Items.Clear();
             xml_request server = new xml_request();
-            string req_sklady = "http://vsiryk.hol.es/xml/sklady.xml"; //+ idTovara
+            string req_sklady = "http://vsiryk.hol.es/xml/tov_na_skl.xml"; //+ idTovara
             XmlDocument docSklady = server.getXmlDoc(req_sklady);
             int countSkladov = docSklady.DocumentElement.ChildNodes.Count;
 
@@ -156,8 +168,8 @@ namespace soft1
             {
                 ListViewItem item = new ListViewItem();
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                item.SubItems[0].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
-                item.SubItems[1].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText;
+                item.SubItems[0].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText;
+                item.SubItems[1].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[2].InnerText;
                 listSkladov.Items.Add(item);
             }
 
@@ -208,9 +220,12 @@ namespace soft1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            xml_request req = new xml_request();
+            XmlFile req = new XmlFile();
+            xml_request sf = new xml_request();
 
-            MessageBox.Show(req.getXmlDoc("http://xml.weather.yahoo.com/forecastrss?p=94704").InnerXml, "xml doc");
+            sf.saveToFile(req.getResponseFromServer("http://" + textBoxTest.Text),@".\cur.xml");
+            //MessageBox.Show(req.getXmlDoc("http://vk.com").InnerXml, "xml doc");
+
         }
 
         private void btnSuccess_Click(object sender, EventArgs e)
