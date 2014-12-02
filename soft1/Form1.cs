@@ -20,37 +20,29 @@ namespace soft1
             comboBoxZakazov.SelectedIndex = 0;
         }
 
-        //public int otgruzOk = 1;
         public int curZakazGlobal = 0;
-        public string curIdZakaza = "null";
 
         private void btnShowAllZakaz(object sender, EventArgs e)
         {
-            //otgruzOk = 1;
-
             listZakazov.Items.Clear(); //clear list zakazov
             listTovarov.Items.Clear(); //clear list tovarov
             listSkladov.Items.Clear(); //clear list skladov
             DescriptionIn.Text = "Описание товара...";
+            string curIdZakaza = "null";
 
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(".\\test.xml");  //load xml into the file 
             xml_request req = new xml_request();
-            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/zakazi.xml"); //http://192.168.35.19/Index.php?option=zakazi");
-
-
+            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/zakazi.xml"); 
+//XmlDocument doc = req.getXmlDoc("http://192.168.35.19/Index.php?option=zakazi");
+            
             int countZakazov = doc.DocumentElement.ChildNodes.Count;
-
             for (int i = 0; i < countZakazov; i++)
             {
                 if (doc.DocumentElement.ChildNodes[i].ChildNodes[2].InnerText == comboBoxZakazov.SelectedIndex.ToString())
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.SubItems.Add(new ListViewItem.ListViewSubItem());
-
-
                     if (doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText != curIdZakaza)
                     {
+                        ListViewItem item = new ListViewItem();
+                        item.SubItems.Add(new ListViewItem.ListViewSubItem());
                         item.SubItems[0].Text = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText; //id zakaza
                         if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == "1") //status vipolneniya
                             item.ImageIndex = 0; //image
@@ -62,40 +54,18 @@ namespace soft1
 
         }
 
-        private void btnGetXml(object sender, EventArgs e)
-        {
-            XmlFile server = new XmlFile();
-            xml_request sf = new xml_request();
-
-            string request = "http://vsiryk.hol.es/xml/test.xml";
-            //MessageBox.Show(request, "dsgf");
-            string response = server.getResponseFromServer(request);
-            //MessageBox.Show(response, "dsgf");
-            sf.saveToFile(response, @".\response.xml");
-        }
-
         private void listZakazov_Click(object sender, EventArgs e)
         {
             listTovarov.Items.Clear(); //clear list tovarov
             listSkladov.Items.Clear(); //clear list skladov
             DescriptionIn.Text = "Описание товара...";
 
-            /*XmlDocument doc = new XmlDocument();
-            doc.Load(".\\test.xml");*/
-
             xml_request req = new xml_request();
             XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/zakazi.xml");
-
+//XmlDocument doc = req.getXmlDoc("http://192.168.35.19/Index.php?option=zakazi");
             string curZakazId = listZakazov.SelectedItems[0].SubItems[0].Text;
+            
             int countOrdersInXml = doc.DocumentElement.ChildNodes.Count;
-            /*
-            curZakazGlobal = 0;
-            while (curZakazId != doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes[0].InnerText)
-            {
-                curZakazGlobal++;
-            }*/
-
-            //int countTovarov = doc.DocumentElement.ChildNodes[curZakazGlobal].ChildNodes.Count - 3;
             for (int i = 0; i < countOrdersInXml; i++)
             {
                 if (doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText == curZakazId.ToString())
@@ -105,7 +75,7 @@ namespace soft1
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
                 item.SubItems[0].Text = doc.DocumentElement.ChildNodes[i].ChildNodes[3].InnerText;
-                //item.SubItems[1].Text = getNameInfTovar(item.SubItems[0].Text, "name"); //берем имя с базы
+//item.SubItems[1].Text = getNameInfTovar(item.SubItems[0].Text, "name"); //берем имя с базы
                 item.SubItems[1].Text = "name"; //name tovara
                 item.SubItems[2].Text = doc.DocumentElement.ChildNodes[i].ChildNodes[4].InnerText;
                 item.SubItems[3].Text = "0";
@@ -131,29 +101,11 @@ namespace soft1
         private void listTovarov_Click(object sender, EventArgs e)
         {
             string idTovara = listTovarov.SelectedItems[0].SubItems[0].Text; //подставить айди желаемого товара
-
-            //xml_request server = new xml_request();
-            //string req_descr = "http://vsiryk.hol.es/xml/tov_na_skl.xml";
-
-            //DescriptionIn.Text = getNameInfTovar(idTovara, "info");
-
-
-            /*XmlDocument docDeskr = server.getXmlDoc(req_descr);
-            DescriptionIn.Text = docDeskr.DocumentElement.InnerText;*/
-
             skladListUpdate(idTovara);
-            /*
-            XmlDocument docSklady = server.getXmlDoc(req_sklady);
-            int countSkladov = docSklady.DocumentElement.ChildNodes.Count;
 
-            for (int i = 0; i < countSkladov; i++)
-            {
-                ListViewItem item = new ListViewItem();
-                item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                item.SubItems[0].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
-                item.SubItems[1].Text = docSklady.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText;
-                listSkladov.Items.Add(item);
-            }*/
+//DescriptionIn.Text = getNameInfTovar(idTovara, "info");
+/*XmlDocument docDeskr = server.getXmlDoc(req_descr);
+DescriptionIn.Text = docDeskr.DocumentElement.InnerText;*/
         }
 
         private void skladListUpdate(string idTovara)
@@ -161,6 +113,7 @@ namespace soft1
             listSkladov.Items.Clear();
             xml_request server = new xml_request();
             string req_sklady = "http://vsiryk.hol.es/xml/tov_na_skl.xml"; //+ idTovara
+//string req_sklady = "http://192.168.35.19/Index.php?option=tovari_na_sclade&id_tovar=" + idTovara;         
             XmlDocument docSklady = server.getXmlDoc(req_sklady);
             int countSkladov = docSklady.DocumentElement.ChildNodes.Count;
 
@@ -174,8 +127,6 @@ namespace soft1
             }
 
         }
-
-
 
         private void btnOtgruz_Click(object sender, EventArgs e)
         {
@@ -203,7 +154,7 @@ namespace soft1
                         XmlFile req = new XmlFile();
                         string idTovara = listTovarov.SelectedItems[0].SubItems[0].Text;
                         string idSklada = listSkladov.SelectedItems[0].SubItems[0].Text;
-                        string url = "http://192.168.35.19/Index.php?option=otgryz&id_tovar=" + idTovara + "&id_sclad=" + idSklada + "&kol_vo=" + numValue.ToString();
+string url = "http://192.168.35.19/Index.php?option=otgryz&id_tovar=" + idTovara + "&id_sclad=" + idSklada + "&kol_vo=" + numValue.ToString();
                         //MessageBox.Show(url, "url");
                         //req.getResponseFromServer(url);
 
@@ -224,8 +175,6 @@ namespace soft1
             xml_request sf = new xml_request();
 
             sf.saveToFile(req.getResponseFromServer("http://" + textBoxTest.Text),@".\cur.xml");
-            //MessageBox.Show(req.getXmlDoc("http://vk.com").InnerXml, "xml doc");
-
         }
 
         private void btnSuccess_Click(object sender, EventArgs e)
@@ -254,6 +203,20 @@ namespace soft1
 
         }
 
+        private void btnShowCategories_Click(object sender, EventArgs e)
+        {
+            xml_request req = new xml_request();
+            XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/categories.xml");
+//XmlDocument doc = req.getXmlDoc("http://195.168.35.19/Index.php?option=get_kategory"); 
 
+            int countCategories = doc.DocumentElement.ChildNodes.Count;
+            for (int i = 0; i < countCategories; i++)
+            {
+                string catName = doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText;
+                comboBoxCategory.Items.Add(catName);
+                if (i == 0)
+                    comboBoxCategory.Text = catName;
+            }
+        }
     }
 }
