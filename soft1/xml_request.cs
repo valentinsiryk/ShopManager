@@ -16,7 +16,6 @@ namespace soft1
         public XmlDocument getXmlDoc(string url) //функция возвращает XmlDocument, для дальнейшего парсинга
         {
             XmlDocument doc = new XmlDocument();
-            //MessageBox.Show(url, "dsgf");
             doc.Load(url);
             return doc;
         }
