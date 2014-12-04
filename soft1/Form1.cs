@@ -89,9 +89,9 @@ namespace soft1
             string url = "http://192.168.35.19/Index.php?option=inf_tov&id_tov=" + idTovara;
             XmlDocument doc = req.getXmlDoc(url);
             if (key == "name")
-                return doc.DocumentElement.ChildNodes[0].InnerText;
+                return doc.DocumentElement.ChildNodes[0].ChildNodes[0].InnerText;
             else if (key == "info")
-                return doc.DocumentElement.ChildNodes[1].InnerText;
+                return doc.DocumentElement.ChildNodes[0].ChildNodes[1].InnerText;
             else
                 return "error";
         }
@@ -151,7 +151,12 @@ namespace soft1
                         string idTovara = listTovarov.SelectedItems[0].SubItems[0].Text;
                         string idSklada = listSkladov.SelectedItems[0].SubItems[0].Text;
                         string url = "http://192.168.35.19/Index.php?option=otgryz&id_tovar=" + idTovara + "&id_sclad=" + idSklada + "&kol_vo=" + numValue.ToString();
-                        WebRequest.Create(url); // Create a request for the URL. 
+
+                        xml_request req2 = new xml_request();
+
+                        XmlDocument doc = req2.getXmlDoc(url);
+                        
+                        //WebRequest.Create(url); // Create a request for the URL. 
                     }
                 }
             }
@@ -182,7 +187,11 @@ namespace soft1
                 if (flag == 0)
                 {
                     string url = "http://192.168.35.19/Index.php?option=change_status&id_zakaza=" + listZakazov.SelectedItems[0].SubItems[0].Text;
-                    WebRequest.Create(url); // Create a request for the URL. 
+                    xml_request req = new xml_request();
+                    
+                    XmlDocument doc = req.getXmlDoc(url); 
+
+                    //WebRequest.Create(url); // Create a request for the URL. 
                     MessageBox.Show("Выполнен!\n" + url, "ok");
                 }
             }
