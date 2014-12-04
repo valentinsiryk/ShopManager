@@ -1,0 +1,7 @@
+D:\GitHub\ShopManager\soft1\bin\Release\soft1.exe
+D:\GitHub\ShopManager\soft1\bin\Release\soft1.pdb
+D:\GitHub\ShopManager\soft1\obj\x86\Release\soft1.Form1.resources
+D:\GitHub\ShopManager\soft1\obj\x86\Release\soft1.Properties.Resources.resources
+D:\GitHub\ShopManager\soft1\obj\x86\Release\soft1.csproj.GenerateResource.Cache
+D:\GitHub\ShopManager\soft1\obj\x86\Release\soft1.exe
+D:\GitHub\ShopManager\soft1\obj\x86\Release\soft1.pdb
