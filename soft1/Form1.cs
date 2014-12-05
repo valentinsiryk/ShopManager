@@ -162,7 +162,7 @@ namespace soft1
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Error!");
+                MessageBox.Show("Можливо ви не обрали замовлення, товар чи склад!", "Error!");
             }
         }
 
@@ -206,26 +206,26 @@ namespace soft1
         {
             xml_request req = new xml_request();
             //XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/categories.xml");
-            XmlDocument doc = req.getXmlDoc("http://195.168.35.19/Index.php?option=get_kategory"); 
-
+            XmlDocument doc = req.getXmlDoc("http://192.168.35.19/Index.php?option=get_kategory");
+            //MessageBox.Show(doc.DocumentElement.InnerXml, "erfg");
             int countCategories = doc.DocumentElement.ChildNodes.Count;
+            
             for (int i = 0; i < countCategories; i++)
             {
                 string catName = doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText;
+                
                 string idCat = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
+                //MessageBox.Show(idCat, "erfg");
                 comboBoxCategory.Items.Add(catName);
                 if (i == 0)
-                {      
                     comboBoxCategory.Text = catName;
-                    //showSubCat(idCat);
-                }
             }
         }
 
         private void showSubCat(string catId)
         {
             xml_request req = new xml_request();
-            XmlDocument doc = req.getXmlDoc("192.168.35.19/Index.php?option=get_sub_kategory&id_kategory=" + catId);
+            XmlDocument doc = req.getXmlDoc("http://192.168.35.19/Index.php?option=get_sub_kategory&id_kategory=" + catId);
             //XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/categories.xml");
             int countSubCats = doc.DocumentElement.ChildNodes.Count;
             comboBox1.Items.Clear();
@@ -247,17 +247,20 @@ namespace soft1
              * посмотреть ее ИД, вызвать функцию showSubCat(catId)*/
             //(catId);
             xml_request req = new xml_request();
-            XmlDocument doc = req.getXmlDoc("http://195.168.35.19/Index.php?option=get_kategory");
+            XmlDocument doc = req.getXmlDoc("http://192.168.35.19/Index.php?option=get_kategory");
             //XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/categories.xml");
             int countCategories = doc.DocumentElement.ChildNodes.Count;
+            
             for (int i = 0; i < countCategories; i++)
             {
                 if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == comboBoxCategory.Text)
                 {
                     string idCat = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
                     showSubCat(idCat);
+                    //MessageBox.Show(idCat, "erfg");
                 }
             }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)

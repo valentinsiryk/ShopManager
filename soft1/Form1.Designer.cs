@@ -66,6 +66,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxScladId = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -78,7 +79,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnShowCategories = new System.Windows.Forms.Button();
-            this.textBoxScladId = new System.Windows.Forms.TextBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -474,6 +474,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Додати товар";
             // 
+            // textBoxScladId
+            // 
+            this.textBoxScladId.Location = new System.Drawing.Point(118, 261);
+            this.textBoxScladId.Name = "textBoxScladId";
+            this.textBoxScladId.Size = new System.Drawing.Size(42, 20);
+            this.textBoxScladId.TabIndex = 13;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -582,19 +589,13 @@
             this.btnShowCategories.UseVisualStyleBackColor = true;
             this.btnShowCategories.Click += new System.EventHandler(this.btnShowCategories_Click);
             // 
-            // textBoxScladId
-            // 
-            this.textBoxScladId.Location = new System.Drawing.Point(118, 261);
-            this.textBoxScladId.Name = "textBoxScladId";
-            this.textBoxScladId.Size = new System.Drawing.Size(42, 20);
-            this.textBoxScladId.TabIndex = 13;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 419);
             this.Controls.Add(this.tabControl1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = " ";
             this.splitContainer1.Panel1.ResumeLayout(false);
