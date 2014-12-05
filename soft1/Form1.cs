@@ -27,7 +27,7 @@ namespace soft1
             listZakazov.Items.Clear(); //clear list zakazov
             listTovarov.Items.Clear(); //clear list tovarov
             listSkladov.Items.Clear(); //clear list skladov
-            DescriptionIn.Text = "Описание товара...";
+            DescriptionIn.Text = "Опис товару...";
             string curIdZakaza = "null";
 
             xml_request req = new xml_request();
@@ -58,7 +58,7 @@ namespace soft1
         {
             listTovarov.Items.Clear(); //clear list tovarov
             listSkladov.Items.Clear(); //clear list skladov
-            DescriptionIn.Text = "Описание товара...";
+            DescriptionIn.Text = "Опис товару...";
 
             xml_request req = new xml_request();
             //XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/zakazi.xml");
@@ -137,9 +137,9 @@ namespace soft1
 
 
                     if (numValue > curSkladNal)
-                        MessageBox.Show("Недостаточно товара на складе!", "Error!");
+                        MessageBox.Show("Недостатньо товару на складі!", "Error!");
                     else if ((curSucNum + numValue) > curCountTovarov)
-                        MessageBox.Show("Количество отгрузки превышает количество заказа!", "Error!");
+                        MessageBox.Show("Ви намагаєтесь відправити більше товару ніж замовлено!", "Error!");
                     else
                     {
                         decimal val = curSucNum + numValue;
@@ -192,7 +192,7 @@ namespace soft1
                     XmlDocument doc = req.getXmlDoc(url); 
 
                     //WebRequest.Create(url); // Create a request for the URL. 
-                    MessageBox.Show("Выполнен!\n" + url, "ok");
+                    MessageBox.Show("Замовлення виконано!\n", "ok");
                 }
             }
             catch (Exception ex)
@@ -217,7 +217,7 @@ namespace soft1
                 if (i == 0)
                 {      
                     comboBoxCategory.Text = catName;
-                    ///showSubCat(catName);
+                    //showSubCat(idCat);
                 }
             }
         }
@@ -226,13 +226,15 @@ namespace soft1
         {
             xml_request req = new xml_request();
             XmlDocument doc = req.getXmlDoc("192.168.35.19/Index.php?option=get_sub_kategory&id_kategory=" + catId);
+            //XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/categories.xml");
             int countSubCats = doc.DocumentElement.ChildNodes.Count;
+            comboBox1.Items.Clear();
             for (int i = 0; i < countSubCats; i++)
             {
                 string subCatName = doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText;
-                comboBoxCategory.Items.Add(subCatName);
+                comboBox1.Items.Add(subCatName);
                 if (i == 0)
-                    comboBoxCategory.Text = subCatName;
+                    comboBox1.Text = subCatName;
             }
             
         }
@@ -244,6 +246,36 @@ namespace soft1
              * найти категорию с выбранным именем,
              * посмотреть ее ИД, вызвать функцию showSubCat(catId)*/
             //(catId);
+            xml_request req = new xml_request();
+            XmlDocument doc = req.getXmlDoc("http://195.168.35.19/Index.php?option=get_kategory");
+            //XmlDocument doc = req.getXmlDoc("http://vsiryk.hol.es/xml/categories.xml");
+            int countCategories = doc.DocumentElement.ChildNodes.Count;
+            for (int i = 0; i < countCategories; i++)
+            {
+                if (doc.DocumentElement.ChildNodes[i].ChildNodes[1].InnerText == comboBoxCategory.Text)
+                {
+                    string idCat = doc.DocumentElement.ChildNodes[i].ChildNodes[0].InnerText;
+                    showSubCat(idCat);
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string name = textBoxNameTov.Text;
+            string count = textBoxTovCount.Text;
+            string scladID = textBoxScladId.Text;
+            string descrTov = richTextBoxDescrNewTov.Text;
+            string subCatName = comboBox1.Text;
+
+            string requestUrl = "http://192.168.35.19/Index.php?option=dobavlenie_tov&name="
+                                + name + "&kol_vo=" + count + "&sclad=" + scladID
+                                + "&opisanie=" + descrTov + "&subcatname=" + subCatName;
+
+            xml_request req = new xml_request();
+            XmlDocument doc = req.getXmlDoc(requestUrl);
+
+            MessageBox.Show("Товар додано!","Увага!");
         }
     }
 }
